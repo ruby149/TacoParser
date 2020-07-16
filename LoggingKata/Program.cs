@@ -3,11 +3,17 @@ using System.Linq;
 using System.IO;
 using GeoCoordinatePortable;
 using System.Runtime.ExceptionServices;
+using System.Security.Cryptography.X509Certificates;
 
 namespace LoggingKata
 {
     class Program
     {
+        public static double ConvertMetersToMiles(double meters)
+        {
+            double answer = meters * 0.000621371;
+            return answer;
+        }
         static readonly ILog logger = new TacoLogger();
         const string csvPath = "TacoBell-US-AL.csv";
 
@@ -71,10 +77,11 @@ namespace LoggingKata
                     }
                    
                 } 
-               
+                
+              
 
             }
-            Console.WriteLine($"the two locations that are furthest away are {tacoBellOne.Name} and {tacoBellTwo.Name}");
+            Console.WriteLine($"the two locations that are furthest away are {tacoBellOne.Name} and {tacoBellTwo.Name} they are {ConvertMetersToMiles(distance)} miles from each other");
 
             // Once you've looped through everything, you've found the two Taco Bells farthest away from each other.
 
